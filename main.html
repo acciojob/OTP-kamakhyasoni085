@@ -1,93 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>OTP Verification</title>
+  <meta charset="UTF-8">
+  <title>OTP Verification</title>
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f8;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    width: 350px;
-  }
+    .container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 360px;
+    }
 
-  #verification_heading {
-    margin-bottom: 10px;
-  }
+    /* Heading */
+    #verification_heading {
+      margin-bottom: 10px;
+    }
 
-  #verification_subtext {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 25px;
-  }
+    /* Subheading */
+    #verification_subtext {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
 
-  .code-container {
-    display: flex;
-    justify-content: space-between;
-  }
+    /* OTP Container */
+    .code-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
 
-  .code {
-    width: 45px;
-    height: 55px;
-    font-size: 24px;
-    text-align: center;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    outline: none;
-  }
+    /* OTP Inputs */
+    .code {
+      width: 45px;
+      height: 55px;
+      font-size: 24px;
+      text-align: center;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+    }
 
-  .code:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0,123,255,0.5);
-  }
-</style>
+    .code:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <!-- Heading -->
-  <h2 id="verification_heading">Verify Your Account</h2>
+    <!-- Heading -->
+    <h2 id="verification_heading">Verify Your Account</h2>
 
-  <!-- Subheading -->
-  <p id="verification_subtext">
-    We emailed you the six digit code. Enter the code below to confirm your email address.
-  </p>
+    <!-- Subheading -->
+    <p id="verification_subtext">
+      We emailed you the six digit code. Enter the code below to confirm your email address.
+    </p>
 
-  <!-- OTP Inputs -->
-  <div class="code-container">
-    <input type="text" maxlength="1" class="code" />
-    <input type="text" maxlength="1" class="code" />
-    <input type="text" maxlength="1" class="code" />
-    <input type="text" maxlength="1" class="code" />
-    <input type="text" maxlength="1" class="code" />
-    <input type="text" maxlength="1" class="code" />
+    <!-- OTP Input Fields -->
+    <div class="code-container">
+      <input type="text" maxlength="1" class="code">
+      <input type="text" maxlength="1" class="code">
+      <input type="text" maxlength="1" class="code">
+      <input type="text" maxlength="1" class="code">
+      <input type="text" maxlength="1" class="code">
+      <input type="text" maxlength="1" class="code">
+    </div>
+
   </div>
-
-</div>
 
 <script>
   const codes = document.querySelectorAll(".code");
 
-  // Focus first box on load
-  codes[0].focus();
+  // Autofocus first input on load
+  window.addEventListener("load", () => {
+    codes[0].focus();
+  });
 
   codes.forEach((code, index) => {
 
-    // Typing forward
+    // ===== Typing Forward =====
     code.addEventListener("input", (e) => {
       const value = e.target.value;
 
@@ -97,23 +104,24 @@
         return;
       }
 
-      // Move to next
-      if (value && index < codes.length - 1) {
+      // Move focus to next field
+      if (index < codes.length - 1) {
         codes[index + 1].focus();
       }
     });
 
-    // Backspace behavior
+    // ===== Backspace Behavior =====
     code.addEventListener("keydown", (e) => {
 
       if (e.key === "Backspace") {
 
+        // If current box empty → move back
         if (code.value === "" && index > 0) {
           codes[index - 1].focus();
-        } else {
-          code.value = "";
         }
 
+        // Clear current value
+        code.value = "";
       }
 
     });
