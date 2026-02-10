@@ -64,21 +64,21 @@
 
   <div class="container">
 
-    <!-- Heading -->
+  
     <h2 id="verification_heading">Verify Your Account</h2>
 
-    <!-- Subheading -->
+  
     <p id="verification_subtext">
       We emailed you the six digit code. Enter the code below to confirm your email address.
     </p>
 
-    <!-- OTP Input Fields -->
-    <div class="code-container">
-      <input type="text" maxlength="1" class="code">
-      <input type="text" maxlength="1" class="code">
-      <input type="text" maxlength="1" class="code">
-      <input type="text" maxlength="1" class="code">
-      <input type="text" maxlength="1" class="code">
+
+    <div id="container">
+      <input.co id="code">
+      <input type="text" maxlength="1" id="code">
+      <input type="text" maxlength="1" id="code">
+      <input type="text" maxlength="1" id="code">
+      <input type="text" maxlength="1" id="code">
       <input type="text" maxlength="1" class="code">
     </div>
 
@@ -87,18 +87,17 @@
 <script>
   const codes = document.querySelectorAll(".code");
 
-  // Autofocus first input on load
+ 
   window.addEventListener("load", () => {
     codes[0].focus();
   });
 
   codes.forEach((code, index) => {
 
-    // ===== Typing Forward =====
+   
     code.addEventListener("input", (e) => {
       const value = e.target.value;
 
-      // Allow only digits
       if (!/^[0-9]$/.test(value)) {
         e.target.value = "";
         return;
